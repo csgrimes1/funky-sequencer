@@ -1,0 +1,29 @@
+{
+  "name": "funky-sequencer",
+  "version": "1.0.0",
+  "description": "Immutable, lazy generator",
+  "main": "index.js",
+  "scripts": {
+    "lint": "toolbin/lint.sh",
+    "newtest": "toolbin/newtest.sh",
+    "plato": "$(npm bin)/plato -e $(pwd)/.eslintrc.json -r -n -d ./.plato **/*.js",
+    "test": "toolbin/lint.sh && $(npm bin)/chi-run test *.test.js .testresults default",
+    "testcov": "$(npm bin)/chi-run test *.test.js .testresults default coverage xunit"
+  },
+  "keywords": [
+    "functional",
+    "immutable",
+    "lazy",
+    "generator",
+    "iterable",
+    "iterator"
+  ],
+  "author": "Chris Grimes",
+  "license": "ISC",
+  "devDependencies": {
+    "chihuahua-reporters": "2.0.2",
+    "eslint": "4.6.1",
+    "sinon": "3.2.1",
+    "wave-collapse": "1.0.7"
+  }
+}
