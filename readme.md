@@ -27,10 +27,10 @@ undefined
     .startingWith(1)
     .repeat(i => i + 1)
     .while(i => i < 10)
-    .resolve(i => 100 + 1);
+    .resolve(i => 100 + i);
 undefined
 > Array.from(iterable2);
-[ 101, 101, 101, 101, 101, 101, 101, 101, 101 ]
+[ 101, 102, 103, 104, 105, 106, 107, 108, 109 ]
 >
 > const iterable3 = funky.when(true);
 undefined

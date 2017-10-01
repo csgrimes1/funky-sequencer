@@ -38,6 +38,19 @@ module.exports = {
             context.equal(count, 0);
         },
 
+        'can resolve on an infinite sequence': (context) => {
+            const iterable = target
+                .startingWith(2)
+                .repeat((i) => i + 1)
+                .resolve((i) => i + 200);
+
+            for (const x of iterable) {
+                context.ok(x >= 200);
+                if (x > 300)
+                    break;
+            }
+        },
+
         'supports resolving each item': context => {
             const iterable = target
                 .startingWith({value: 1000})

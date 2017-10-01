@@ -45,33 +45,55 @@ function createFiniteIterator (startValue, callback, predicate) {
     };
 }
 
-function createIterable (startValue, callback, predicate) {
+function createIterator (startValue, callback, predicate) {
     //Limit the boolean branches to this one rather than checking for
     //a predicate on every iteration.
     const theIterator = predicate
         ? createFiniteIterator(startValue, callback, predicate)
         : createInfiniteIterator(startValue, callback);
 
+    //An iterator is an object with a next method.
     return () => theIterator;
+}
+
+function createIterableFunction (doCreateIterator, extra) {
+    const ifunc = () => ({
+        [Symbol.iterator]: doCreateIterator()
+    });
+
+    return Object.assign(ifunc, extra);
+}
+
+function resolver (iteratorCtor, resolver) {
+    function *_resolver() { //eslint-disable-line
+        const iterable = createIterableFunction(iteratorCtor, {});
+        for (const x of iterable()) {
+            yield resolver(x);
+        }
+    }
+
+    return () => ({
+        [Symbol.iterator]: _resolver
+    });
+}
+
+function createWhileLambda (startValue, callback) {
+    return (predicate) => {
+        const iteratorCtor = () => createIterator(startValue, callback, predicate);
+        const iterable = createIterableFunction(iteratorCtor, {
+            resolve: (mapper) => resolver(iteratorCtor, mapper)
+        });
+
+        return iterable;
+    };
 }
 
 function createSequencer (extendedApi = {}, value = undefined) {
     return Object.assign({
         repeat: (callback) => {
-            const iterable = Object.assign({}, {
-                [Symbol.iterator]: createIterable(value, callback),
-                while: (predicate) => {
-                    const iterable = {[Symbol.iterator]: createIterable(value, callback, predicate)};
-                    return Object.assign({}, iterable, {
-                        resolve: function *(resolver) {
-                            for (const x of iterable) {
-                                yield resolver(x);
-                            }
-                        }
-                    });
-                }
+            return createIterableFunction(createIterator(value, callback), {
+                while: createWhileLambda(value, callback)
             });
-            return iterable;
         }
     }, extendedApi);
 }
@@ -91,3 +113,4 @@ module.exports = createSequencer({
     startingWith: (value) => createSequencer({}, wrapValue(value)),
     when: createWhen()
 });
+
