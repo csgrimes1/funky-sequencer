@@ -5,9 +5,9 @@ const waveCollapse = require('wave-collapse').defaultApi;
 
 const sequence = funky
     .startingWith({a: 0, b: 1})
-    .repeat(f => ({a: f.b, b: f.a + f.b}))
-    .while(f => f.a < 1000)
-    .resolve(f => f.a);
+     .repeat(f => ({a: f.b, b: f.a + f.b}))
+     .while(f => f.a < 1000)
+     .resolve(f => f.a);
 
 console.log('1:', Array.from(sequence()))
 console.log('2:', Array.from(sequence()))
