@@ -1,7 +1,9 @@
 'use strict';
 
+/* eslint-disable valid-jsdoc */
+
 function seedCallback (callback, startValue) {
-    if (!startValue)
+    if (startValue === undefined)
         return callback;
     //Set up initial callback for initial value
     const innerCallbacks = [
@@ -30,7 +32,7 @@ function createInfiniteIterator (startValue, callback) {
 }
 
 function createBooleanIterator (startValue) {
-    const values = startValue !== undefined ? [startValue] : [];
+    const values = startValue === undefined ? [] : [startValue];
     let index = -1;
     return {
         next: () => {
@@ -59,17 +61,13 @@ function createFiniteIterator (startValue, callback, predicate) {
     };
 }
 
-function wrapValue (value) {
-    return {value};
-}
-
 function createWhen () {
-    return (condition, resolver = () => true) => entryPoint({}, wrapValue(0))
+    return (condition, resolver = () => true) => entryPoint()
+        .startingWith(0)
         .repeat((i) => i + 1)
         .while((i) => condition && i < 1)
         .resolve(resolver);
 }
-
 
 function selectIterator (options) {
     if (options.predicate) {
@@ -80,11 +78,6 @@ function selectIterator (options) {
     }
 
     return createBooleanIterator(options.startValue);
-
-    return function *() {
-        if (options.startValue)
-            yield options.startValue;
-    }
 }
 
 /**
@@ -129,14 +122,12 @@ function merge (first, second) {
 function resolver () {
     return function (options, mapper) {
         const self = this;
-        return function *(options) {
+        return function *() {
             for (const x of self()) {
                 yield mapper(x);
             }
         };
     };
-
-    return (options, mapper) => createFuncReturningIterable(options, {});
 }
 
 function whiler () {
