@@ -1,6 +1,6 @@
 ## funky-sequencer
 
-An immutable generator library.
+An immutable generator library. ![Disco](disco.gif)
 
 ### Installation
 
@@ -20,7 +20,7 @@ undefined
     .repeat(i => i + 1)
     .while(i => i < 10);
 undefined
-> Array.from(iterable1);
+> Array.from(iterable1());
 [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 >
 > const iterable2 = funky
@@ -29,17 +29,17 @@ undefined
     .while(i => i < 10)
     .resolve(i => 100 + i);
 undefined
-> Array.from(iterable2);
+> Array.from(iterable2());
 [ 101, 102, 103, 104, 105, 106, 107, 108, 109 ]
 >
 > const iterable3 = funky.when(true);
 undefined
-> Array.from(iterable3);
+> Array.from(iterable3());
 [ true ]
 >
 > const iterable4 = funky.when(false);
 undefined
-> Array.from(iterable4);
+> Array.from(iterable4());
 []
 > 
 ```

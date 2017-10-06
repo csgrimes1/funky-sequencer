@@ -7,8 +7,8 @@ const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 function conditionalBlast(isBusinessHours, isWeekday, emailList) {
     console.log('Booleans:', isBusinessHours, isWeekday);
     return waveCollapse.combinations(emailList)
-        .with(funky.when(isBusinessHours))
-        .with(funky.when(isWeekday))
+        .with(funky.when(isBusinessHours)())
+        .with(funky.when(isWeekday)())
         .map(values => values[0])
         .filter(email => email.match(emailRegex));
 }
