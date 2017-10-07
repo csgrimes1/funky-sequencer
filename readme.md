@@ -1,6 +1,6 @@
 ## funky-sequencer
 
-An immutable generator library. ![Disco](disco.gif)
+An immutable generator library.
 
 ### Installation
 
