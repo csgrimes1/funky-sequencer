@@ -1,0 +1,23 @@
+{
+  "name": "doodles",
+  "version": "1.0.0",
+  "description": "Shows google doodles on a web page.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch ./src ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "funky-sequencer": "file:../../",
+    "moment": "^2.19.1",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "wave-collapse": "^1.0.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
