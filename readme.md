@@ -1,4 +1,4 @@
-## funky-sequencer
+## funky-sequencer  [![Build Status](https://travis-ci.org/csgrimes1/funky-sequencer.svg?branch=master)](https://travis-ci.org/csgrimes1/funky-sequencer.svg?branch=master)
 
 An immutable generator library.
 
