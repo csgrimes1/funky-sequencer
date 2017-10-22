@@ -1,4 +1,4 @@
-## funky-sequencer  [![Build Status](https://travis-ci.org/csgrimes1/funky-sequencer.svg?branch=master)](https://travis-ci.org/csgrimes1/funky-sequencer.svg?branch=master)
+## funky-sequencer  [![Build Status](https://travis-ci.org/csgrimes1/funky-sequencer.svg?branch=master)](https://travis-ci.org/csgrimes1/funky-sequencer)
 
 An immutable generator library.
 
@@ -60,7 +60,7 @@ not be called again, and the sequence will end. It creates
 an infinite sequence when `while` is not used.
 * _**resolve**_ is a mapping function called on each item
 in the sequence.
-* _**funky.when**_ is an implements an algorithm resembling Scala's
+* _**funky.when**_ implements an pattern resembling Scala's
 Option. If the argument to `when` is truthy, the resulting sequence has
 1 member. If the argument is falsy, the resulting sequence is empty.
 This provides a means of providing boolean logic when processing
