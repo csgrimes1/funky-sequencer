@@ -7,7 +7,6 @@ const assert = require('assert');
 const sequence = funky
     .startingWith({a: 0, b: 1})
      .repeat(f => ({a: f.b, b: f.a + f.b}))
-     .while(f => f.a < 1000)
      .resolve(f => f.a);
 
 waveCollapse.iterateOver(sequence())

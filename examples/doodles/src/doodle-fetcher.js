@@ -11,29 +11,28 @@ process.on('unhandledRejection', (reason) => {
     console.error('rejection:', reason);
 });
 
-function getMonth (monthInfo) {
-    const url = `https://www.google.com/doodles/json/${monthInfo.monthCursor.year()}/${monthInfo.monthCursor.month() + 1}?hl=en`;
-    const promisedResults = request(url)
+function getMonth (month) {
+    //add is mutable, so construct new moment from string format.
+    return moment(month.format()).add(1, 'month');
+}
+
+function doHttpQuery (month) {
+    const url = `https://www.google.com/doodles/json/${month.year()}/${month.month() + 1}?hl=en`;
+    console.log(`Starting HTTP request to [${url}].`);
+    return request(url)
         .then(x => {
             return Promise.resolve(x);
         });
-    const month = moment(monthInfo.monthCursor.format());
-
-    return {
-        promisedResults,
-        renderedMonth: moment(month),
-        monthCursor: moment(month).add(1, 'month')
-    };
 }
 
 module.exports = function fetch (start, end) {
     const startDate = moment(start);
     const endDate = moment(end);
     const monthIterator = funky
-        .startingWith(getMonth({monthCursor: moment(start)}))
+        .startingWith(moment(start).date(1))
         .repeat(getMonth)
-        .while(monthInfo => monthInfo.renderedMonth.isSameOrBefore(endDate))
-        .resolve(monthInfo => monthInfo.promisedResults);
+        .while(monthStart => monthStart.isSameOrBefore(endDate))
+        .resolve(doHttpQuery);
 
     return waveCollapse.iterateOver(monthIterator())
         .map(p => JSON.parse(p))

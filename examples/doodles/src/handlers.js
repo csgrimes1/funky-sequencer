@@ -2,17 +2,16 @@
 
 const doodleFetcher = require('./doodle-fetcher');
 
+function render (response, details, defaults = {start: '2016-12-25', end: '2017-01-16'}) {
 const form = `
-    <form method="POST" target="/">
+    <form method="POST" action="/">
         <div>
-            <label for"start">Start:</label> <input type="text" id="start" name="start" value="2016-12-01"/>
-            &nbsp;<label for"end">End:</label> <input type="text" id="end" name="end" value="2017-01-15"/>
+            <label for"start">Start:</label> <input type="text" id="start" name="start" value="${defaults.start}"/>
+            &nbsp;<label for"end">End:</label> <input type="text" id="end" name="end" value="${defaults.end}"/>
             &nbsp;<input type="submit" value="OK" />
         </div>
     </form>
 `;
-
-function render (response, details) {
     const text = `<html><head><title>Doodles!</title></head>\n\t<body> ${form}\n\t${details} \n\t</body>\n</html>`;
     response.send(text);
 }
@@ -40,8 +39,10 @@ function postHandler (request, response) {
     const body = request.body;
     return doodleFetcher(body.start, body.end)
         .then(doodles => {
-                // console.log('doodles:', doodles)
-            render(response, renderDetails(doodles));
+            render(response, renderDetails(doodles), body);
+        })
+        .catch(err => {
+            response.status(500).send(err);
         });
 }
 
