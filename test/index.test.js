@@ -72,6 +72,13 @@ module.exports = {
             context.equal(spy.callCount, 1);
         },
 
+        'supports when never requires resolver': context => {
+            const iterable = funky.when(true);
+            const result = Array.from(iterable());
+            context.equal(result.length, 1);
+            context.equal(result[0], true);
+        },
+
         'when never invokes callback on false condition': context => {
             const spy = sinon.spy();
             const iterable = funky.when(false, spy);

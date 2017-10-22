@@ -23,6 +23,8 @@
   "devDependencies": {
     "chihuahua-reporters": "2.0.2",
     "eslint": "4.6.1",
+    "nyc": "^11.2.1",
+    "proxyquire": "1.8.0",
     "sinon": "3.2.1",
     "wave-collapse": "1.0.9"
   }
