@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- '8'
+deploy:
+  api_key:
+    secure: ba27YKjrn6LarWV4ltiuEn+zVpPLSLJlZhlFEfCzTWgf3beseg7ExM4ApkpBpqBgGq5nMzoiOanXn1W5EyTE6v0NelApy1mTluJ0QxqriCJntTnURhOerZOulW/SbIaho/vvMbTDLGSxvKyjrP09ETggUrOxda9xvXzUcXJzT0qo/bIj6at7tRgTjBaXGiKTF648XosTwkQWm65OJ9nF4Mv/kxZdr19V0Kg8mnlKNT/E3GA69yMg92mTPKsT/TgFID1PE4d4Q0XwtVOq0hpGxUIJFwWoRwOKVNnKwqTlya7vc/rmiZlmTu1a1ELgE8l5UvSd6TudPuR13GshJVt/Od7SvoEdERufxHL5aRF2yFlpz4d2q1ybYjXAYoKNL6RDF58I6C1BOzNxw2rJUjD3HNzZPiqk2+seOesdh9KB+3XXCeaFNsQrGltb/wJl74uytmydiJ7aqoc5Us/cDvyvuve4yGkYvGxXN4rLnxxIlmWycK1pvGtuxn6NUXKrHvw1G7wq1Knn3bQuuDERzma0Ws04ZFSGbVxbCd/zOH/Zq88gJ8rsX6L/STySao8Wr2hhol9nXP+OzKust4z0lZM/neDn1nvxIx8c5l21nWriLIhLBVia1UgYibYNYk6Ttv8AueGqI68DCmDcN0vNLocJJAUIBZfbUdvgUu5twXxcB8k=
+  provider: npm
+  email: csgrimes1@gmail.com
+  on:
+    branch: master
