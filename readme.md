@@ -80,8 +80,8 @@ images over a date range.
 
 ### Patterns
 
-Both patterns discussed here are addressed in the *doodles* and
-*fibonacci* examples, respectively.
+The patterns discussed here are addressed in the *doodles*,
+*loop-decision*, and *fibonacci* examples, respectively.
 
 ##### Expensive Calls
 
@@ -102,6 +102,33 @@ work of making calls to the Google Doodles API.
 This pattern is similar to a `for` loop, with `repeat()` doing the
 work of the top of the loop, and `resolve()` doing the work of the
 loop's body.
+
+##### Boolean Control
+
+The number of combinations between `n` sets is calculated with the
+following formula:
+
+```
+s1 * s2 * ... * sN
+```
+
+`s1` to `sN` represent the number of elements in each set. If
+any of the member counts is zero, then there are *no combinations*
+of the sets. This fact can be useful when iterating over set
+combinations.
+
+Say you want to look at combinations only when
+one or more conditions are true. The most ready solution is to use
+one or more `if` statements. But instead of creating such code branches,
+you can represent your conditions as iterables, and these
+iterables can be passed to the combinator. When any such condition
+is `false`, no combinations will be rendered. As a bonus, using
+`funky.when()` does not introduce a branch in your code. (There is
+a branch, but it's in this library, and it has full unit test
+coverage!)
+
+Please look at the `loop-decision` example to illustrate the use
+of the `funky.when()` method for this purpose.
 
 ##### Pure Algorithms
 
