@@ -44,6 +44,51 @@ undefined
 > 
 ```
 
+### Value Proposition
+
+If you ever happen to dabble with a language such as `Erlang`, you'll notice
+that the language does not support loops. You must rely on techniques such
+as *tail recursion* to repeat a block of code.
+
+There are many reasons why a functional language would lack support for
+loops. First, loops encourage mutation of variables, whereas functional
+programming favors immutability. Second, bugs like to lurk in the recesses
+of loops and branches, where variables change and unit test branch coverage
+misses these edge cases. Finally, functions may be used rather than
+keywords such as `for` and `if` to control flow.
+
+Regarding that last point, functional programmers would argue that a void
+function is a missed opportunity. Keywords such as
+`while` and `for` act like void function calls. These keywords are a
+missed opportunity. Example:
+
+```javascript
+let ar = [];
+for (let i=0; i<10; i++) {
+    ar.push(i);
+}
+```
+
+The `for` loop has no *output* value; therefore, you must mutate a variable
+in the loop body. The equivalent code using *funky-sequencer*:
+
+```javascript
+const iterator = funky.startingWith(0)
+    .repeat(i => i + 1)
+    .while(i < 10);
+const ar = Array.from(iterator());
+```
+
+The first expression of this last example returns an `Iterable` that 
+gets consumed to create
+the array. The second example is completely immutable because
+of loop logic creating output.
+
+A final benefit of the `Iterable` in ECMAScript is the ability to
+consume it in a lazy manner. In other words, each member in the
+sequence is generated only when a consumer needs it. You don't 
+generate 100 elements when you only need to use 10.
+
 ### Methods
 
 The module exports a fluent API as shown in the REPL
