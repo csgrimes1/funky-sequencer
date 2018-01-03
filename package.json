@@ -1,7 +1,7 @@
 {
   "name": "funky-sequencer",
   "repository": "https://github.com/csgrimes1/funky-sequencer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Immutable, lazy generator",
   "main": "index.js",
   "scripts": {
